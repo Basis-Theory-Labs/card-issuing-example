@@ -17,9 +17,6 @@ const placeholder = (maskedValue: string) => {
   return `•••• •••• •••• ${lastFour}`;
 };
 
-const backgrounds = ['visa.png', 'mastercard.png', 'amex.png'];
-const colors = ['#00000099', 'white', 'white'];
-
 export const CardsCarousel = ({ index, tokens, onChange }: Props) => {
   return (
     <Box mt={2}>

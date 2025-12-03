@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 
 const VirtualCards = () => {
   const [init, setInit] = useState(false);
-  const [busy, setBusy] = useState(false);
+  const [busyAction, setBusyAction] = useState<string>();
   const [visible, setVisible] = useState(false);
   const [cards, setCards] = useState<Token[]>([]);
   const [cardIndex, setCardIndex] = useState<number>(0);
@@ -23,9 +23,9 @@ const VirtualCards = () => {
 
   const toggleDisplayCard = async () => {
     if (!visible && selectedCard?.id !== visibleCard?.id) {
-      setBusy(true);
+      setBusyAction('display');
       await displayCard();
-      setBusy(false);
+      setBusyAction(undefined);
     }
     setVisible(!visible);
   };
@@ -43,12 +43,16 @@ const VirtualCards = () => {
   };
 
   const deleteCard = async () => {
-    await axios.delete(`/api/virtual-cards/${cards[cardIndex].id}`);
-    const copy = [...cards];
-    copy.splice(cardIndex, 1);
-    setCards(copy);
-    setVisible(false);
-    setCardIndex(0);
+    setBusyAction('delete');
+    if (window.confirm('Delete this card?')) {
+      await axios.delete(`/api/virtual-cards/${cards[cardIndex].id}`);
+      const copy = [...cards];
+      copy.splice(cardIndex, 1);
+      setCards(copy);
+      setVisible(false);
+      setCardIndex(0);
+    }
+    setBusyAction(undefined);
   };
 
   const fetchTokens = async () => {
@@ -90,12 +94,18 @@ const VirtualCards = () => {
                 onChange={handleSelectCard}
               />
               <Box display="flex" justifyContent="end" mt={2}>
-                <Button variant="outlined" onClick={deleteCard}>
+                <Button
+                  loading={busyAction === 'delete'}
+                  disabled={!!busyAction}
+                  variant="outlined"
+                  onClick={deleteCard}
+                  color="error"
+                >
                   Delete Card
                 </Button>
                 <Button
-                  loading={busy}
-                  disabled={!bt}
+                  loading={busyAction === 'display'}
+                  disabled={!bt || !!busyAction}
                   variant="contained"
                   onClick={toggleDisplayCard}
                   sx={{ ml: 1 }}
