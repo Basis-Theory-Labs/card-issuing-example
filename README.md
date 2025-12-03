@@ -1,6 +1,6 @@
-# Card PIN Example
+# Card Issuing Example
 
-This example shows how to Set PIN to a Card issued with Marqeta, Lithic or Galileo using Basis Theory Elements. 
+This example shows how to Issue and Display cards with Marqeta, Lithic and Stripe.
 
 
 ## Setup 
