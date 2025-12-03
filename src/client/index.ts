@@ -1,21 +1,23 @@
-import { BasisTheory } from "@basis-theory/basis-theory-js/types/sdk";
-import { RefObject } from "react";
-import { TextElement } from "@basis-theory/basis-theory-react/types";
-import { setPinGalileo } from "@/client/galileo";
-import { setPinLithic } from "@/client/lithic";
-import { setPinMarqeta } from "@/client/marqeta";
+import {
+  BasisTheoryElements,
+  ITextElement,
+} from '@basis-theory/react-elements';
+import { RefObject } from 'react';
+import { setPinGalileo } from '@/client/galileo';
+import { setPinLithic } from '@/client/lithic';
+import { setPinMarqeta } from '@/client/marqeta';
 
 const setPinIssuer = (
-  issuer: "marqeta" | "lithic" | "galileo",
-  bt: BasisTheory,
-  pinRef: RefObject<TextElement>
+  issuer: 'marqeta' | 'lithic' | 'galileo',
+  bt: BasisTheoryElements,
+  pinRef: RefObject<ITextElement>
 ) => {
   switch (issuer) {
-    case "galileo":
+    case 'galileo':
       return setPinGalileo(bt, pinRef);
-    case "lithic":
+    case 'lithic':
       return setPinLithic(bt, pinRef);
-    case "marqeta":
+    case 'marqeta':
       return setPinMarqeta(bt, pinRef);
     default:
       throw new Error(`Issuer "${issuer}" not supported.`);

@@ -5,19 +5,17 @@ import {
   Divider,
   Typography,
   useTheme,
-} from "@mui/material";
-import { useEffect, useRef } from "react";
-import {
-  CardNumberElement as ICardNumberElement,
-  CardExpirationDateElement as ICardExpirationDateElement,
-  CardVerificationCodeElement as ICardVerificationCodeElement,
-} from "@basis-theory/basis-theory-js/types/elements/elements";
+} from '@mui/material';
+import { useEffect, useRef } from 'react';
 import {
   CardExpirationDateElement,
   CardNumberElement,
   CardVerificationCodeElement,
-} from "@basis-theory/basis-theory-react";
-import { Box } from "@mui/system";
+  ICardExpirationDateElement,
+  ICardNumberElement,
+  ICardVerificationCodeElement,
+} from '@basis-theory/react-elements';
+import { Box } from '@mui/system';
 
 interface Props {
   visible?: boolean;
@@ -43,7 +41,7 @@ export const CardDetails = ({ visible, token }: Props) => {
   return (
     <Collapse in={visible && !!token}>
       <Card variant="outlined" sx={{ mt: 3 }}>
-        <CardContent sx={{ display: "flex" }}>
+        <CardContent sx={{ display: 'flex' }}>
           <Typography fontWeight="600" width="30%">
             Card Number
           </Typography>
@@ -58,7 +56,14 @@ export const CardDetails = ({ visible, token }: Props) => {
               style={{
                 base: {
                   color: theme.palette.text.primary,
-                  "::placeholder": {
+                  '::placeholder': {
+                    color: theme.palette.text.primary,
+                  },
+                },
+                invalid: {
+                  // workaround for invalid test card numbers
+                  color: theme.palette.text.primary,
+                  '::placeholder': {
                     color: theme.palette.text.primary,
                   },
                 },
@@ -67,7 +72,7 @@ export const CardDetails = ({ visible, token }: Props) => {
           </Box>
         </CardContent>
         <Divider />
-        <CardContent sx={{ display: "flex" }}>
+        <CardContent sx={{ display: 'flex' }}>
           <Typography fontWeight="600" width="30%">
             Expiration Date
           </Typography>
@@ -81,7 +86,7 @@ export const CardDetails = ({ visible, token }: Props) => {
               style={{
                 base: {
                   color: theme.palette.text.primary,
-                  "::placeholder": {
+                  '::placeholder': {
                     color: theme.palette.text.primary,
                   },
                 },
@@ -90,7 +95,7 @@ export const CardDetails = ({ visible, token }: Props) => {
           </Box>
         </CardContent>
         <Divider />
-        <CardContent sx={{ display: "flex" }}>
+        <CardContent sx={{ display: 'flex' }}>
           <Typography fontWeight="600" width="30%">
             CVC
           </Typography>
@@ -104,12 +109,23 @@ export const CardDetails = ({ visible, token }: Props) => {
               style={{
                 base: {
                   color: theme.palette.text.primary,
-                  "::placeholder": {
+                  '::placeholder': {
                     color: theme.palette.text.primary,
                   },
                 },
               }}
             />
+          </Box>
+        </CardContent>
+        <Divider />
+        <CardContent sx={{ display: 'flex' }}>
+          <Typography fontWeight="600" width="30%">
+            Issuer / Source
+          </Typography>
+          <Box ml={4} flex={1}>
+            <Typography variant="body2">
+              {token?.metadata?.issuer?.toUpperCase() || 'n/a'}
+            </Typography>
           </Box>
         </CardContent>
       </Card>

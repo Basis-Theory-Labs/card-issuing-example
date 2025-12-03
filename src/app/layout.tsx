@@ -7,7 +7,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "My Bank",
+  title: "TokenTrust",
   description: "Card Issuing Demo",
 };
 

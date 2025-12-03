@@ -1,20 +1,20 @@
-import axios from "axios";
-import type { RefObject } from "react";
+import axios from 'axios';
+import type { RefObject } from 'react';
 import type {
-  TextElement,
   BasisTheoryElements,
-} from "@basis-theory/basis-theory-react/types";
+  ITextElement,
+} from '@basis-theory/react-elements';
 
 export const setPinMarqeta = async (
   bt: BasisTheoryElements,
-  pinRef: RefObject<TextElement>
+  pinRef: RefObject<ITextElement>
 ) => {
   const token = await bt.tokens.create({
-    type: "token",
+    type: 'token',
     data: pinRef.current,
   });
 
-  await axios.post("/api/authorize/marqeta", {
+  await axios.post('/api/authorize/marqeta', {
     token,
   });
 };

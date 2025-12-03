@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
 export async function POST(request: NextRequest) {
-  const { token } = await request.json();
+  const { token } = await request.json<any>();
 
   const {
     data: { control_token },

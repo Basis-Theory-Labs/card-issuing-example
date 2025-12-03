@@ -6,15 +6,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { TextElement, useBasisTheory } from "@basis-theory/basis-theory-react";
+import { TextElement, useBasisTheory, ITextElement, BasisTheoryElements } from "@basis-theory/react-elements";
 import { LoadingButton } from "@mui/lab";
 import { RefObject, useEffect, useRef, useState } from "react";
-import { TextElement as ITextElement } from "@basis-theory/basis-theory-js/types/elements/elements";
-import type { BasisTheory } from "@basis-theory/basis-theory-js/types/sdk";
 
 interface Props extends Pick<DialogProps, "open" | "onClose"> {
   setPin: (
-    bt: BasisTheory,
+    bt: BasisTheoryElements,
     pinRef: RefObject<ITextElement>
   ) => Promise<unknown>;
 }
