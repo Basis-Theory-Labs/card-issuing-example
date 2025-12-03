@@ -5,10 +5,14 @@ import type { ReactNode } from "react";
 interface Props {
   cardNumber?: ReactNode;
   cardholderName?: string;
+  backgroundImageUrl?: string;
+  color?: string;
 }
 export const Card = ({
-  cardNumber = "3759 •••• •••• 2312",
+  cardNumber = "•••• •••• •••• 2312",
   cardholderName = "James J. Holden",
+  backgroundImageUrl = "/mastercard.png",
+  color = "white",
 }: Props) => {
   return (
     <Box width="100%">
@@ -17,8 +21,7 @@ export const Card = ({
           width: "100%",
           position: "relative",
           paddingTop: "60.48%",
-          background:
-            "url(/mastercard.png), lightgray 0% 0% / 45.32000124454498px 45.32000124454498px repeat;",
+          background: `url(${backgroundImageUrl}), lightgray 0% 0% / 45.32000124454498px 45.32000124454498px repeat;`,
           backgroundSize: "cover",
           borderRadius: "5%/8.4%",
         }}
@@ -30,17 +33,18 @@ export const Card = ({
           height="100%"
           sx={{ containerType: "inline-size" }}
         >
-          <Box position="absolute" top="56.67%" left="9.6%">
+          <Box position="absolute" top="56.67%" left="9.6%" width="65%">
             {typeof cardNumber === "string" && (
-              <Typography color="white" fontSize="5.734cqw">
+              <Typography color={color} fontSize="5.734cqw" fontWeight="600">
                 {cardNumber}
               </Typography>
             )}
             {typeof cardNumber !== "string" && cardNumber}
           </Box>
           <Typography
-            color="white"
+            color={color}
             fontSize="4.84cqw"
+            fontWeight="600"
             position="absolute"
             top="73%"
             left="9.6%"

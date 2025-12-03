@@ -3,19 +3,18 @@
 import { Button, Card, CardContent, Snackbar } from "@mui/material";
 import { Box } from "@mui/system";
 import { RefObject, useState } from "react";
-import type { TextElement as ITextElement } from "@basis-theory/basis-theory-react/types";
+import {  ITextElement, BasisTheoryElements } from "@basis-theory/react-elements";
 import { Card as CardRender } from "@/components/Card";
 import { setPinIssuer } from "@/client";
 import { SetPinDialog } from "@/components/SetPinDialog";
-import type { BasisTheory } from "@basis-theory/basis-theory-js/types/sdk";
 
 const PhysicalCard = () => {
   const [open, setOpen] = useState(false);
   const [snackbar, setSnackbar] = useState<string>();
 
-  const setPin = async (bt: BasisTheory, pinRef: RefObject<ITextElement>) => {
+  const setPin = async (bt: BasisTheoryElements, pinRef: RefObject<ITextElement>) => {
     try {
-      await setPinIssuer("galileo", bt, pinRef);
+      await setPinIssuer("marqeta", bt, pinRef);
       setSnackbar("PIN set successfully!");
     } catch (error) {
       setSnackbar("An error occurred, check the console for more info.");
@@ -29,7 +28,7 @@ const PhysicalCard = () => {
     <>
       <Card variant="outlined">
         <CardContent sx={{ p: 4 }}>
-          <CardRender />
+          <CardRender backgroundImageUrl="/amex-3.png" />
           <Box display="flex" justifyContent="end" mt={2}>
             <Button variant="contained" onClick={() => setOpen(true)}>
               Set PIN Number
